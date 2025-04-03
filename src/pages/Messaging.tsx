@@ -1,4 +1,3 @@
-
 import React, { useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import { ArrowLeft, Send } from "lucide-react";
@@ -59,10 +58,10 @@ const Messaging = () => {
   };
 
   return (
-    <div className="flex flex-col h-screen bg-gray-100">
+    <div className="flex flex-col h-[100vh] bg-gray-100 fixed inset-0 overflow-hidden">
       {/* Header */}
-      <header className="fixed top-0 left-0 right-0 h-16 bg-white border-b border-gray-200 z-50 flex items-center px-4">
-        <div className="flex items-center w-full max-w-lg mx-auto">
+      <header className="h-16 bg-white border-b border-gray-200 flex items-center px-4">
+        <div className="flex items-center w-full">
           <Button 
             variant="ghost" 
             size="icon" 
@@ -84,8 +83,8 @@ const Messaging = () => {
       </header>
 
       {/* Message area */}
-      <div className="flex-1 overflow-auto pt-20 pb-20 px-4">
-        <div className="max-w-lg mx-auto">
+      <div className="flex-1 overflow-y-auto px-4">
+        <div className="w-full mx-auto">
           {messages.map((message, i) => (
             <div 
               key={i} 
@@ -106,8 +105,8 @@ const Messaging = () => {
       </div>
 
       {/* Message input */}
-      <div className="fixed bottom-0 left-0 right-0 bg-white border-t border-gray-200 p-4">
-        <div className="max-w-lg mx-auto flex">
+      <div className="bg-white border-t border-gray-200 p-4">
+        <div className="flex">
           <input
             type="text"
             value={newMessage}

@@ -1,4 +1,3 @@
-
 import React, { useEffect, useState } from 'react';
 import { X, ChevronDown, Calendar, Wrench, Fuel, Tractor, Truck } from 'lucide-react';
 import { Swiper, SwiperSlide } from 'swiper/react';
@@ -75,7 +74,7 @@ const TractorImageCarousel: React.FC<TractorImageCarouselProps> = ({
       </Button>
       
       {/* Image carousel */}
-      <div className="relative h-[50vh]">
+      <div className="relative h-[40vh]">
         <Swiper 
           initialSlide={initialSlide}
           className="h-full w-full"
@@ -113,84 +112,86 @@ const TractorImageCarousel: React.FC<TractorImageCarouselProps> = ({
       </div>
       
       {/* Scrollable tractor information */}
-      <ScrollArea className="flex-1 bg-white rounded-t-3xl overflow-y-auto">
-        <div className="px-6 py-8">
-          <h1 className="text-3xl font-bold mb-1">
-            {tractor.make} {tractor.model}
-          </h1>
-          <p className="text-lg text-gray-500 mb-4">{tractor.age} years young</p>
-          
-          <div className="mb-6">
-            <h2 className="text-xl font-semibold mb-2">About Me</h2>
-            <p className="text-gray-700">{tractor.bio}</p>
-          </div>
-          
-          <div className="mb-6">
-            <h2 className="text-xl font-semibold mb-3">Tractor Specs</h2>
-            <div className="grid grid-cols-2 gap-4">
-              <div className="flex items-center">
-                <Wrench className="h-5 w-5 mr-2 text-gray-500" />
-                <div>
-                  <p className="text-sm text-gray-500">Horsepower</p>
-                  <p className="font-medium">{tractorSpecs.horsepower} HP</p>
+      <div className="flex-1 bg-white rounded-t-3xl">
+        <ScrollArea className="h-[60vh] w-full">
+          <div className="px-6 py-8">
+            <h1 className="text-3xl font-bold mb-1">
+              {tractor.make} {tractor.model}
+            </h1>
+            <p className="text-lg text-gray-500 mb-4">{tractor.age} years young</p>
+            
+            <div className="mb-6">
+              <h2 className="text-xl font-semibold mb-2">About Me</h2>
+              <p className="text-gray-700">{tractor.bio}</p>
+            </div>
+            
+            <div className="mb-6">
+              <h2 className="text-xl font-semibold mb-3">Tractor Specs</h2>
+              <div className="grid grid-cols-2 gap-4">
+                <div className="flex items-center">
+                  <Wrench className="h-5 w-5 mr-2 text-gray-500" />
+                  <div>
+                    <p className="text-sm text-gray-500">Horsepower</p>
+                    <p className="font-medium">{tractorSpecs.horsepower} HP</p>
+                  </div>
                 </div>
-              </div>
-              
-              <div className="flex items-center">
-                <Fuel className="h-5 w-5 mr-2 text-gray-500" />
-                <div>
-                  <p className="text-sm text-gray-500">Fuel</p>
-                  <p className="font-medium">{tractorSpecs.fuelType}</p>
+                
+                <div className="flex items-center">
+                  <Fuel className="h-5 w-5 mr-2 text-gray-500" />
+                  <div>
+                    <p className="text-sm text-gray-500">Fuel</p>
+                    <p className="font-medium">{tractorSpecs.fuelType}</p>
+                  </div>
                 </div>
-              </div>
-              
-              <div className="flex items-center">
-                <Truck className="h-5 w-5 mr-2 text-gray-500" />
-                <div>
-                  <p className="text-sm text-gray-500">Top Speed</p>
-                  <p className="font-medium">{tractorSpecs.topSpeed}</p>
+                
+                <div className="flex items-center">
+                  <Truck className="h-5 w-5 mr-2 text-gray-500" />
+                  <div>
+                    <p className="text-sm text-gray-500">Top Speed</p>
+                    <p className="font-medium">{tractorSpecs.topSpeed}</p>
+                  </div>
                 </div>
-              </div>
-              
-              <div className="flex items-center">
-                <Tractor className="h-5 w-5 mr-2 text-gray-500" />
-                <div>
-                  <p className="text-sm text-gray-500">Lifting Capacity</p>
-                  <p className="font-medium">{tractorSpecs.lifting}</p>
+                
+                <div className="flex items-center">
+                  <Tractor className="h-5 w-5 mr-2 text-gray-500" />
+                  <div>
+                    <p className="text-sm text-gray-500">Lifting Capacity</p>
+                    <p className="font-medium">{tractorSpecs.lifting}</p>
+                  </div>
                 </div>
-              </div>
-              
-              <div className="flex items-center">
-                <Wrench className="h-5 w-5 mr-2 text-gray-500" />
-                <div>
-                  <p className="text-sm text-gray-500">Transmission</p>
-                  <p className="font-medium">{tractorSpecs.transmission}</p>
+                
+                <div className="flex items-center">
+                  <Wrench className="h-5 w-5 mr-2 text-gray-500" />
+                  <div>
+                    <p className="text-sm text-gray-500">Transmission</p>
+                    <p className="font-medium">{tractorSpecs.transmission}</p>
+                  </div>
                 </div>
-              </div>
-              
-              <div className="flex items-center">
-                <Calendar className="h-5 w-5 mr-2 text-gray-500" />
-                <div>
-                  <p className="text-sm text-gray-500">Previous Owners</p>
-                  <p className="font-medium">{tractorSpecs.previousOwners}</p>
+                
+                <div className="flex items-center">
+                  <Calendar className="h-5 w-5 mr-2 text-gray-500" />
+                  <div>
+                    <p className="text-sm text-gray-500">Previous Owners</p>
+                    <p className="font-medium">{tractorSpecs.previousOwners}</p>
+                  </div>
                 </div>
               </div>
             </div>
+            
+            <div className="mb-6">
+              <h2 className="text-xl font-semibold mb-2">What I'm Looking For</h2>
+              <p className="text-gray-700">A farmer who appreciates quality machinery and knows how to handle curves... in the field, of course! Must enjoy long drives through wheat fields and not mind a little mud now and then.</p>
+            </div>
+            
+            <Button 
+              onClick={onClose}
+              className="w-full bg-green-500 hover:bg-green-600 text-white"
+            >
+              Back to Browsing
+            </Button>
           </div>
-          
-          <div className="mb-6">
-            <h2 className="text-xl font-semibold mb-2">What I'm Looking For</h2>
-            <p className="text-gray-700">A farmer who appreciates quality machinery and knows how to handle curves... in the field, of course! Must enjoy long drives through wheat fields and not mind a little mud now and then.</p>
-          </div>
-          
-          <Button 
-            onClick={onClose}
-            className="w-full bg-green-500 hover:bg-green-600 text-white"
-          >
-            Back to Browsing
-          </Button>
-        </div>
-      </ScrollArea>
+        </ScrollArea>
+      </div>
     </div>
   );
 };
