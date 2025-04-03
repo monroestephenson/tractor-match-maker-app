@@ -6,12 +6,12 @@
   "homepage": "https://tractr.store",
   "scripts": {
     "dev": "vite",
-    "build": "vite build && cp public/favicon* dist/ && cp public/site.webmanifest dist/ && cp public/apple-touch-icon.png dist/",
+    "build": "vite build && cp public/favicon.ico public/favicon-*.png public/apple-touch-icon.png public/site.webmanifest public/.nojekyll public/_headers dist/",
     "build:dev": "vite build --mode development",
     "lint": "eslint .",
     "preview": "vite preview",
     "predeploy": "npm run build",
-    "deploy": "gh-pages -d dist"
+    "deploy": "gh-pages -d dist --dotfiles"
   },
   "dependencies": {
     "@hookform/resolvers": "^3.9.0",
