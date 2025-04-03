@@ -15,25 +15,6 @@ import { useNavigate } from "react-router-dom";
 import "swiper/css";
 import "swiper/css/effect-cards";
 
-// Add a test profile to verify rendering
-const testProfile: TractorProfile = {
-  id: 999,
-  name: "Test Tractor 9000",
-  age: 25,
-  bio: "Testing rendering logic only.",
-  image: "/lovable-uploads/162183d8-145d-44cf-97e8-68d40f7d43b5.png",
-  images: [
-    "/lovable-uploads/162183d8-145d-44cf-97e8-68d40f7d43b5.png",
-    "/lovable-uploads/26755a37-8b7f-4499-86b8-7692c579c81c.png"
-  ],
-  make: "Test",
-  model: "9000",
-  responseMessages: ["This is a test tractor for rendering verification."]
-};
-
-// Update tractor profiles to include multiple images
-const enhancedProfiles = tractorProfiles;
-
 // Type for storing matches
 interface StoredMatch {
   tractor: TractorProfile;
@@ -56,12 +37,9 @@ const TractorSwiper: React.FC = () => {
   useEffect(() => {
     localStorage.setItem('tractorMatches', JSON.stringify(matches));
   }, [matches]);
-
-  // Add our test profile at the beginning to ensure something renders
-  const allProfiles = [testProfile, ...enhancedProfiles];
   
   // Shuffle the tractor profiles to get a random order
-  const shuffledProfiles = useRef([...allProfiles].sort(() => Math.random() - 0.5));
+  const shuffledProfiles = useRef([...tractorProfiles].sort(() => Math.random() - 0.5));
 
   // Debug on mount
   useEffect(() => {
