@@ -1,5 +1,4 @@
-
-import React, { useState, useRef, useEffect } from "react";
+import React, { useState, useRef } from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Swiper as SwiperType } from "swiper";
 import { tractorProfiles, TractorProfile } from "../data/tractorProfiles";
@@ -15,8 +14,8 @@ import "swiper/css";
 const enhancedProfiles = tractorProfiles.map(tractor => {
   // Use the uploaded images
   const uploadedImages = [
-    "public/lovable-uploads/162183d8-145d-44cf-97e8-68d40f7d43b5.png",
-    "public/lovable-uploads/26755a37-8b7f-4499-86b8-7692c579c81c.png"
+    "/lovable-uploads/162183d8-145d-44cf-97e8-68d40f7d43b5.png",
+    "/lovable-uploads/26755a37-8b7f-4499-86b8-7692c579c81c.png"
   ];
   
   // Generate between 2-4 random images for each tractor
@@ -28,7 +27,7 @@ const enhancedProfiles = tractorProfiles.map(tractor => {
   return {
     ...tractor,
     images: images,
-    image: images[0] // Keep the original image as the first one for compatibility
+    image: images[0] // Set the original image as the first one for compatibility
   };
 });
 

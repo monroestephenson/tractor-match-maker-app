@@ -21,7 +21,11 @@ const TractorImageCarousel: React.FC<TractorImageCarouselProps> = ({
   onClose,
   initialSlide = 0
 }) => {
-  const images = tractor.images || [tractor.image];
+  // Apply the same image logic as in TractorCard
+  const images = (tractor.images && tractor.images.length > 0)
+    ? tractor.images
+    : [tractor.image];
+    
   const [showScrollHint, setShowScrollHint] = useState(true);
   
   // Hide scroll hint after 3 seconds

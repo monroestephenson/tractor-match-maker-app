@@ -10,9 +10,12 @@ interface TractorCardProps {
 }
 
 const TractorCard: React.FC<TractorCardProps> = ({ tractor }) => {
-  // Extract the multiple images from the tractor profile
-  // If the tractor doesn't have multiple images, create an array with just the main image
-  const images = tractor.images || [tractor.image];
+  // Extract the images array from the tractor profile
+  // Default to an array with just the main image if images array is absent or empty
+  const images = (tractor.images && tractor.images.length > 0)
+    ? tractor.images
+    : [tractor.image];
+    
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
   const [showCarousel, setShowCarousel] = useState(false);
 
