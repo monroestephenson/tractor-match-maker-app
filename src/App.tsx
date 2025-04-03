@@ -6,7 +6,7 @@ import './App.css';
 
 function App() {
   return (
-    <Router basename="/tractr">
+    <Router basename="/">
       <div className="h-screen bg-gray-100">
         <Routes>
           <Route path="/" element={<TractorSwiper />} />

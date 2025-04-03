@@ -3,7 +3,7 @@
   "private": true,
   "version": "0.0.0",
   "type": "module",
-  "homepage": "https://monroestephenson.github.io/tractr/",
+  "homepage": "https://tractr.store",
   "scripts": {
     "dev": "vite",
     "build": "vite build",
