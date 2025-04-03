@@ -6,7 +6,7 @@
   "homepage": "https://tractr.store",
   "scripts": {
     "dev": "vite",
-    "build": "vite build && cp -r public/* dist/",
+    "build": "vite build && cp public/favicon* dist/ && cp public/site.webmanifest dist/ && cp public/apple-touch-icon.png dist/",
     "build:dev": "vite build --mode development",
     "lint": "eslint .",
     "preview": "vite preview",

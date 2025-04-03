@@ -26,16 +26,17 @@ export default defineConfig(({ mode }) => ({
     },
   },
   build: {
+    assetsDir: '.',
     rollupOptions: {
       output: {
         manualChunks: undefined,
         assetFileNames: (assetInfo) => {
           const info = assetInfo.name ? assetInfo.name : 'asset';
-          let extType = info.split('.').at(1) ?? 'asset';
-          if (/png|jpe?g|svg|gif|tiff|bmp|ico|webp/i.test(extType)) {
-            extType = 'img';
+          if (info.endsWith('.ico') || info.endsWith('.webmanifest') || info.endsWith('.png')) {
+            return info;
           }
-          return `assets/${extType}/[name]-[hash][extname]`;
+          const ext = path.extname(info);
+          return `assets/${path.basename(info, ext)}-[hash]${ext}`;
         },
         chunkFileNames: 'assets/js/[name]-[hash].js',
         entryFileNames: 'assets/js/[name]-[hash].js',
