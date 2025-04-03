@@ -10,18 +10,25 @@ export interface TractorProfile {
   responseMessages: string[];
 }
 
+// Helper function to handle image paths for both local and GitHub Pages environments
+const getImagePath = (path: string) => {
+  // Remove leading slash if exists
+  const cleanPath = path.startsWith('/') ? path.substring(1) : path;
+  return cleanPath;
+};
+
 export const tractorProfiles: TractorProfile[] = [
   {
     id: 1,
     name: "Kubota B8200",
     age: 35,
     bio: "Reliable compact tractor with Japanese efficiency. I may be small but I can handle any job around the farm. Looking for someone who appreciates durability and versatility.",
-    image: "/tractor-pics/kubota_b8200_1.webp",
+    image: getImagePath("/tractor-pics/kubota_b8200_1.webp"),
     images: [
-      "/tractor-pics/kubota_b8200_1.webp",
-      "/tractor-pics/KUBOTA_B8200_2.webp",
-      "/tractor-pics/KUBOTA-B8200-3.webp",
-      "/tractor-pics/KUBOTA-B8200-4.webp"
+      getImagePath("/tractor-pics/kubota_b8200_1.webp"),
+      getImagePath("/tractor-pics/KUBOTA_B8200_2.webp"),
+      getImagePath("/tractor-pics/KUBOTA-B8200-3.webp"),
+      getImagePath("/tractor-pics/KUBOTA-B8200-4.webp")
     ],
     make: "Kubota",
     model: "B8200",

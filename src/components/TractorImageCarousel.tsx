@@ -84,17 +84,17 @@ const TractorImageCarousel: React.FC<TractorImageCarouselProps> = ({
             <SwiperSlide key={index}>
               <div 
                 className="h-full w-full bg-center bg-cover flex items-center justify-center"
-                style={{ backgroundImage: `url(${image || '/placeholder.svg'})` }}
+                style={{ backgroundImage: `url(${import.meta.env.BASE_URL}${image || 'placeholder.svg'})` }}
               >
                 {/* Fallback if image fails to load */}
                 <img 
-                  src={image || '/placeholder.svg'} 
+                  src={`${import.meta.env.BASE_URL}${image || 'placeholder.svg'}`} 
                   alt={`${tractor.make} ${tractor.model}`} 
                   className="hidden" 
                   onError={(e) => {
                     // If image fails, change background to placeholder
                     const target = e.currentTarget;
-                    target.parentElement!.style.backgroundImage = "url('/placeholder.svg')";
+                    target.parentElement!.style.backgroundImage = `url('${import.meta.env.BASE_URL}placeholder.svg')`;
                   }}
                 />
               </div>

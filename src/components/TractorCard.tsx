@@ -40,7 +40,7 @@ const TractorCard: React.FC<TractorCardProps> = ({ tractor }) => {
   };
 
   // Ensure we always have a valid image URL
-  const currentImageUrl = images[currentImageIndex] || '/placeholder.svg';
+  const currentImageUrl = images[currentImageIndex] || 'placeholder.svg';
 
   return (
     <>
@@ -50,7 +50,7 @@ const TractorCard: React.FC<TractorCardProps> = ({ tractor }) => {
       >
         <div 
           className="absolute inset-0 bg-cover bg-center z-0" 
-          style={{ backgroundImage: `url(${currentImageUrl})` }}
+          style={{ backgroundImage: `url(${import.meta.env.BASE_URL}${currentImageUrl})` }}
         />
         <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/30 to-transparent z-10" />
         
