@@ -146,7 +146,7 @@ const Messages: React.FC = () => {
               </div>
             </div>
           ) : (
-            matches.map(match => (
+            [...matches].reverse().map(match => (
               <div
                 key={match.tractor.id}
                 onClick={() => handleMatchSelect(match)}

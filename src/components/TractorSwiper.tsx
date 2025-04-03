@@ -155,7 +155,7 @@ const TractorSwiper: React.FC = () => {
         </Button>
       </div>
 
-      <div className="flex-1 w-full overflow-hidden px-4">
+      <div className="flex-1 w-full overflow-hidden px-2">
         <Swiper
           onSwiper={(swiper) => {
             swiperRef.current = swiper;
@@ -171,7 +171,7 @@ const TractorSwiper: React.FC = () => {
             perSlideOffset: 8,
           }}
           grabCursor={true}
-          className="w-full h-[calc(100vh-160px)] max-w-md mx-auto"
+          className="w-full h-[calc(100vh-160px)] max-w-[95%] mx-auto"
           allowTouchMove={true}
           resistance={true}
           resistanceRatio={0.85}

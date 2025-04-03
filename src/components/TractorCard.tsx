@@ -45,7 +45,7 @@ const TractorCard: React.FC<TractorCardProps> = ({ tractor }) => {
   return (
     <>
       <div 
-        className="relative w-full aspect-[2/3] rounded-xl overflow-hidden shadow-lg bg-white cursor-pointer border border-gray-200 transform transition-transform"
+        className="relative w-full aspect-[9/16] rounded-xl overflow-hidden shadow-lg bg-white cursor-pointer border border-gray-200 transform transition-transform"
         onClick={handleCardClick}
       >
         <div 

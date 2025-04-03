@@ -21,10 +21,23 @@ const Messaging = () => {
   const location = useLocation();
   const navigate = useNavigate();
   const { tractor } = location.state || {};
+  const messagesEndRef = React.useRef<HTMLDivElement>(null);
   const [messages, setMessages] = useState<{ text: string; sent: boolean }[]>([
     { text: `Hey there! I'm ${tractor?.name || "the tractor"} - ready to talk tractors and deals!`, sent: false },
   ]);
   const [newMessage, setNewMessage] = useState("");
+
+  const scrollToBottom = () => {
+    messagesEndRef.current?.scrollTo({
+      top: messagesEndRef.current.scrollHeight,
+      behavior: 'smooth'
+    });
+  };
+
+  // Scroll to bottom when messages change
+  React.useEffect(() => {
+    scrollToBottom();
+  }, [messages]);
 
   if (!tractor) {
     return (
@@ -84,8 +97,8 @@ const Messaging = () => {
 
       {/* Message area */}
       <div className="flex-1 overflow-y-auto px-4">
-        <div className="w-full mx-auto">
-          {messages.map((message, i) => (
+        <div className="w-full mx-auto flex flex-col-reverse py-4">
+          {[...messages].reverse().map((message, i) => (
             <div 
               key={i} 
               className={`mb-4 flex ${message.sent ? 'justify-end' : 'justify-start'}`}
