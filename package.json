@@ -3,7 +3,7 @@
   "private": true,
   "version": "0.0.0",
   "type": "module",
-  "homepage": "https://monroestephenson.github.io/tractor-match-maker-app/",
+  "homepage": "https://monroestephenson.github.io/tractr/",
   "scripts": {
     "dev": "vite",
     "build": "vite build",
