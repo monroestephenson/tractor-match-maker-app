@@ -5,6 +5,7 @@ export interface TractorProfile {
   age: number;
   bio: string;
   image: string;
+  images?: string[];
   make: string;
   model: string;
   responseMessages: string[];
