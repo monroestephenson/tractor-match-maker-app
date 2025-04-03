@@ -32,25 +32,7 @@ const testProfile: TractorProfile = {
 };
 
 // Update tractor profiles to include multiple images
-const enhancedProfiles = tractorProfiles.map(tractor => {
-  // Use the uploaded images
-  const uploadedImages = [
-    "/lovable-uploads/162183d8-145d-44cf-97e8-68d40f7d43b5.png",
-    "/lovable-uploads/26755a37-8b7f-4499-86b8-7692c579c81c.png"
-  ];
-  
-  // Generate between 2-4 random images for each tractor
-  const numberOfImages = Math.floor(Math.random() * 3) + 2;
-  const images = Array.from({ length: numberOfImages }, () => 
-    uploadedImages[Math.floor(Math.random() * uploadedImages.length)]
-  );
-  
-  return {
-    ...tractor,
-    images: images,
-    image: images[0] // Set the original image as the first one for compatibility
-  };
-});
+const enhancedProfiles = tractorProfiles;
 
 // Type for storing matches
 interface StoredMatch {
