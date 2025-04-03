@@ -3,14 +3,20 @@ import React from "react";
 import { TractorProfile } from "../data/tractorProfiles";
 import { Button } from "@/components/ui/button";
 import { MessageSquare } from "lucide-react";
+import { useNavigate } from "react-router-dom";
 
 interface MatchPopupProps {
   tractor: TractorProfile;
-  onStartChat: () => void;
   onClose: () => void;
 }
 
-const MatchPopup: React.FC<MatchPopupProps> = ({ tractor, onStartChat, onClose }) => {
+const MatchPopup: React.FC<MatchPopupProps> = ({ tractor, onClose }) => {
+  const navigate = useNavigate();
+
+  const handleStartBidding = () => {
+    navigate("/messaging", { state: { tractor } });
+  };
+
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black bg-opacity-70">
       <div className="bg-white rounded-xl p-6 w-full max-w-md animate-pop-in">
@@ -39,10 +45,10 @@ const MatchPopup: React.FC<MatchPopupProps> = ({ tractor, onStartChat, onClose }
         <div className="flex flex-col space-y-3">
           <Button
             className="bg-tractr-green hover:bg-tractr-green/90 text-white"
-            onClick={onStartChat}
+            onClick={handleStartBidding}
           >
             <MessageSquare className="mr-2 h-4 w-4" />
-            Send a Message
+            Start Bidding
           </Button>
           <Button
             variant="outline"

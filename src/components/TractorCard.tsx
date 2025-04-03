@@ -1,19 +1,72 @@
 
-import React from "react";
+import React, { useState } from "react";
 import { TractorProfile } from "../data/tractorProfiles";
+import { ChevronLeft, ChevronRight } from "lucide-react";
+import { Button } from "@/components/ui/button";
 
 interface TractorCardProps {
   tractor: TractorProfile;
 }
 
 const TractorCard: React.FC<TractorCardProps> = ({ tractor }) => {
+  // Extract the multiple images from the tractor profile
+  // If the tractor doesn't have multiple images, create an array with just the main image
+  const images = tractor.images || [tractor.image];
+  const [currentImageIndex, setCurrentImageIndex] = useState(0);
+
+  const nextImage = (e: React.MouseEvent) => {
+    e.stopPropagation();
+    setCurrentImageIndex((prevIndex) => (prevIndex + 1) % images.length);
+  };
+
+  const prevImage = (e: React.MouseEvent) => {
+    e.stopPropagation();
+    setCurrentImageIndex((prevIndex) => prevIndex === 0 ? images.length - 1 : prevIndex - 1);
+  };
+
   return (
     <div className="relative w-full h-full rounded-xl overflow-hidden shadow-lg bg-white">
       <div 
-        className="absolute inset-0 bg-cover bg-center z-0" 
-        style={{ backgroundImage: `url(${tractor.image})` }}
+        className="absolute inset-0 bg-cover bg-center z-0 transition-opacity duration-300" 
+        style={{ backgroundImage: `url(${images[currentImageIndex]})` }}
       />
       <div className="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent z-10" />
+      
+      {/* Image navigation buttons */}
+      {images.length > 1 && (
+        <>
+          <Button
+            onClick={prevImage}
+            variant="outline"
+            size="icon"
+            className="absolute left-2 top-1/2 transform -translate-y-1/2 z-20 bg-white/30 hover:bg-white/50 rounded-full p-1 w-8 h-8"
+          >
+            <ChevronLeft className="h-5 w-5 text-white" />
+          </Button>
+          <Button
+            onClick={nextImage}
+            variant="outline"
+            size="icon"
+            className="absolute right-2 top-1/2 transform -translate-y-1/2 z-20 bg-white/30 hover:bg-white/50 rounded-full p-1 w-8 h-8"
+          >
+            <ChevronRight className="h-5 w-5 text-white" />
+          </Button>
+        </>
+      )}
+
+      {/* Image indicators */}
+      {images.length > 1 && (
+        <div className="absolute top-4 left-0 right-0 z-20 flex justify-center gap-1">
+          {images.map((_, index) => (
+            <div 
+              key={index} 
+              className={`h-1.5 rounded-full transition-all ${
+                index === currentImageIndex ? "w-4 bg-white" : "w-1.5 bg-white/50"
+              }`}
+            />
+          ))}
+        </div>
+      )}
       
       <div className="absolute bottom-0 left-0 right-0 p-6 z-20 text-white">
         <h2 className="text-2xl font-bold">

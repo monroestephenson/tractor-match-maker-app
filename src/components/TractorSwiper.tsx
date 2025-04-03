@@ -6,21 +6,40 @@ import { tractorProfiles, TractorProfile } from "../data/tractorProfiles";
 import TractorCard from "./TractorCard";
 import SwipeButtons from "./SwipeButtons";
 import MatchPopup from "./MatchPopup";
-import ChatInterface from "./ChatInterface";
 import { toast } from "sonner";
 
 // Import Swiper styles
 import "swiper/css";
 
+// Update tractor profiles to include multiple images
+const enhancedProfiles = tractorProfiles.map(tractor => {
+  // Use the uploaded images
+  const uploadedImages = [
+    "public/lovable-uploads/162183d8-145d-44cf-97e8-68d40f7d43b5.png",
+    "public/lovable-uploads/26755a37-8b7f-4499-86b8-7692c579c81c.png"
+  ];
+  
+  // Generate between 2-4 random images for each tractor
+  const numberOfImages = Math.floor(Math.random() * 3) + 2;
+  const images = Array.from({ length: numberOfImages }, () => 
+    uploadedImages[Math.floor(Math.random() * uploadedImages.length)]
+  );
+  
+  return {
+    ...tractor,
+    images: images,
+    image: images[0] // Keep the original image as the first one for compatibility
+  };
+});
+
 const TractorSwiper: React.FC = () => {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [showMatch, setShowMatch] = useState(false);
   const [matchedTractor, setMatchedTractor] = useState<TractorProfile | null>(null);
-  const [showChat, setShowChat] = useState(false);
   const swiperRef = useRef<SwiperType | null>(null);
 
   // Shuffle the tractor profiles to get a random order
-  const shuffledProfiles = useRef([...tractorProfiles].sort(() => Math.random() - 0.5));
+  const shuffledProfiles = useRef([...enhancedProfiles].sort(() => Math.random() - 0.5));
 
   const handleSwipeLeft = () => {
     // Play reject animation if needed
@@ -44,55 +63,36 @@ const TractorSwiper: React.FC = () => {
     setCurrentIndex(swiper.activeIndex);
   };
 
-  const handleStartChat = () => {
-    setShowMatch(false);
-    setShowChat(true);
-  };
-
-  const handleBackToSwiping = () => {
-    setMatchedTractor(null);
-    setShowChat(false);
-  };
-
   return (
     <div className="h-full w-full relative">
-      {!showChat ? (
-        <>
-          <div className="h-[calc(100%-100px)] w-full">
-            <Swiper
-              onSwiper={(swiper) => {
-                swiperRef.current = swiper;
-              }}
-              onSlideChange={handleSwiperSlideChange}
-              slidesPerView={1}
-              className="w-full h-full"
-              allowTouchMove={true}
-            >
-              {shuffledProfiles.current.map((tractor) => (
-                <SwiperSlide key={tractor.id} className="flex items-center justify-center">
-                  <TractorCard tractor={tractor} />
-                </SwiperSlide>
-              ))}
-            </Swiper>
-          </div>
-          
-          <SwipeButtons
-            onSwipeLeft={handleSwipeLeft}
-            onSwipeRight={handleSwipeRight}
-          />
-          
-          {showMatch && matchedTractor && (
-            <MatchPopup
-              tractor={matchedTractor}
-              onStartChat={handleStartChat}
-              onClose={() => setShowMatch(false)}
-            />
-          )}
-        </>
-      ) : (
-        matchedTractor && (
-          <ChatInterface tractor={matchedTractor} onBack={handleBackToSwiping} />
-        )
+      <div className="h-[calc(100%-100px)] w-full">
+        <Swiper
+          onSwiper={(swiper) => {
+            swiperRef.current = swiper;
+          }}
+          onSlideChange={handleSwiperSlideChange}
+          slidesPerView={1}
+          className="w-full h-full"
+          allowTouchMove={true}
+        >
+          {shuffledProfiles.current.map((tractor) => (
+            <SwiperSlide key={tractor.id} className="flex items-center justify-center">
+              <TractorCard tractor={tractor} />
+            </SwiperSlide>
+          ))}
+        </Swiper>
+      </div>
+      
+      <SwipeButtons
+        onSwipeLeft={handleSwipeLeft}
+        onSwipeRight={handleSwipeRight}
+      />
+      
+      {showMatch && matchedTractor && (
+        <MatchPopup
+          tractor={matchedTractor}
+          onClose={() => setShowMatch(false)}
+        />
       )}
     </div>
   );
