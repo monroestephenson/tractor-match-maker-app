@@ -1,30 +1,21 @@
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import TractorSwiper from './components/TractorSwiper';
+import Messages from './pages/Messages';
+import { Toaster } from '@/components/ui/toaster';
+import './App.css';
 
-import { Toaster } from "@/components/ui/toaster";
-import { Toaster as Sonner } from "@/components/ui/sonner";
-import { TooltipProvider } from "@/components/ui/tooltip";
-import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
-import Index from "./pages/Index";
-import Messaging from "./pages/Messaging";
-import NotFound from "./pages/NotFound";
-
-const queryClient = new QueryClient();
-
-const App = () => (
-  <QueryClientProvider client={queryClient}>
-    <TooltipProvider>
-      <Toaster />
-      <Sonner />
-      <BrowserRouter>
+function App() {
+  return (
+    <Router>
+      <div className="h-screen bg-gray-100">
         <Routes>
-          <Route path="/" element={<Index />} />
-          <Route path="/messaging" element={<Messaging />} />
-          {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
-          <Route path="*" element={<NotFound />} />
+          <Route path="/" element={<TractorSwiper />} />
+          <Route path="/messages" element={<Messages />} />
         </Routes>
-      </BrowserRouter>
-    </TooltipProvider>
-  </QueryClientProvider>
-);
+        <Toaster />
+      </div>
+    </Router>
+  );
+}
 
 export default App;

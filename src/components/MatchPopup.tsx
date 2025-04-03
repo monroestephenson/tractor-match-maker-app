@@ -14,7 +14,7 @@ const MatchPopup: React.FC<MatchPopupProps> = ({ tractor, onClose }) => {
   const navigate = useNavigate();
 
   const handleStartBidding = () => {
-    navigate("/messaging", { state: { tractor } });
+    navigate("/messages", { state: { tractor } });
   };
 
   return (

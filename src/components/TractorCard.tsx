@@ -45,14 +45,14 @@ const TractorCard: React.FC<TractorCardProps> = ({ tractor }) => {
   return (
     <>
       <div 
-        className="relative w-full aspect-[3/4] rounded-xl overflow-hidden shadow-lg bg-white cursor-pointer border border-gray-200 transform transition-transform"
+        className="relative w-full aspect-[4/6] rounded-xl overflow-hidden shadow-lg bg-white cursor-pointer border border-gray-200 transform transition-transform"
         onClick={handleCardClick}
       >
         <div 
-          className="absolute inset-0 bg-cover bg-center z-0 transition-transform duration-200 hover:scale-105" 
+          className="absolute inset-0 bg-cover bg-center z-0" 
           style={{ backgroundImage: `url(${currentImageUrl})` }}
         />
-        <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/30 to-transparent z-10" />
+        <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-transparent z-10" />
         
         {/* Image navigation buttons */}
         {images.length > 1 && (
@@ -94,7 +94,7 @@ const TractorCard: React.FC<TractorCardProps> = ({ tractor }) => {
           <h2 className="text-2xl font-bold mb-1">
             {tractor.make} {tractor.model}
           </h2>
-          <p className="text-lg opacity-90 mb-2">{tractor.age} years young</p>
+          <p className="text-lg font-medium opacity-90 mb-2">{tractor.age} years young</p>
           <p className="text-sm opacity-90 line-clamp-3">{tractor.bio}</p>
         </div>
       </div>
