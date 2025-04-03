@@ -18,6 +18,13 @@ export function getImagePath(path: string): string {
   if (import.meta.env.DEV) {
     return `/${cleanPath}`;
   } else {
-    return `${import.meta.env.BASE_URL}${cleanPath}`;
+    // For production, ensure we don't duplicate the base path
+    // If the path already contains tractor-pics, strip the prefix to avoid duplication
+    const baseUrl = import.meta.env.BASE_URL;
+    if (cleanPath.includes('tractor-pics/')) {
+      return `${baseUrl}tractor-pics/${cleanPath.split('tractor-pics/')[1]}`;
+    } else {
+      return `${baseUrl}${cleanPath}`;
+    }
   }
 }
