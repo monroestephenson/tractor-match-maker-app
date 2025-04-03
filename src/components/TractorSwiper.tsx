@@ -1,7 +1,7 @@
-
 import React, { useState, useRef, useEffect } from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Swiper as SwiperType } from "swiper";
+import { EffectCards } from 'swiper/modules';
 import { tractorProfiles, TractorProfile } from "../data/tractorProfiles";
 import TractorCard from "./TractorCard";
 import SwipeButtons from "./SwipeButtons";
@@ -10,6 +10,7 @@ import { toast } from "sonner";
 
 // Import Swiper styles
 import "swiper/css";
+import "swiper/css/effect-cards";
 
 // Add a test profile to verify rendering
 const testProfile: TractorProfile = {
@@ -89,31 +90,56 @@ const TractorSwiper: React.FC = () => {
     setCurrentIndex(swiper.activeIndex);
   };
 
+  const handleSwipe = (swiper: SwiperType) => {
+    const swipeDirection = swiper.swipeDirection;
+    if (swipeDirection === 'next') {
+      handleSwipeLeft();
+    } else if (swipeDirection === 'prev') {
+      handleSwipeRight();
+    }
+  };
+
   return (
     <div className="h-full w-full relative flex flex-col">
-      <div className="flex-1 w-full overflow-hidden">
+      <div className="flex-1 w-full overflow-hidden px-4 py-2">
         <Swiper
           onSwiper={(swiper) => {
             swiperRef.current = swiper;
             console.log("Swiper initialized");
           }}
           onSlideChange={handleSwiperSlideChange}
-          slidesPerView={1}
-          className="w-full h-full"
+          onTouchEnd={handleSwipe}
+          effect={'cards'}
+          modules={[EffectCards]}
+          cardsEffect={{
+            slideShadows: false,
+            perSlideRotate: 4,
+            perSlideOffset: 8,
+          }}
+          grabCursor={true}
+          className="w-full h-[calc(100vh-180px)] max-w-md mx-auto"
           allowTouchMove={true}
+          resistance={true}
+          resistanceRatio={0.85}
+          touchRatio={1.5}
+          touchAngle={45}
+          followFinger={true}
+          threshold={5}
         >
           {shuffledProfiles.current.map((tractor, idx) => (
-            <SwiperSlide key={tractor.id || idx} className="h-full flex items-center justify-center">
+            <SwiperSlide key={tractor.id || idx} className="rounded-xl overflow-hidden">
               <TractorCard tractor={tractor} />
             </SwiperSlide>
           ))}
         </Swiper>
       </div>
       
-      <SwipeButtons
-        onSwipeLeft={handleSwipeLeft}
-        onSwipeRight={handleSwipeRight}
-      />
+      <div className="pb-safe">
+        <SwipeButtons
+          onSwipeLeft={handleSwipeLeft}
+          onSwipeRight={handleSwipeRight}
+        />
+      </div>
       
       {showMatch && matchedTractor && (
         <MatchPopup

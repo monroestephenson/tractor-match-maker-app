@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect } from "react";
 import { TractorProfile } from "../data/tractorProfiles";
 import { ChevronLeft, ChevronRight } from "lucide-react";
@@ -46,15 +45,14 @@ const TractorCard: React.FC<TractorCardProps> = ({ tractor }) => {
   return (
     <>
       <div 
-        className="relative w-full h-full max-h-[70vh] rounded-xl overflow-hidden shadow-lg bg-white cursor-pointer border border-gray-200"
+        className="relative w-full aspect-[3/4] rounded-xl overflow-hidden shadow-lg bg-white cursor-pointer border border-gray-200 transform transition-transform"
         onClick={handleCardClick}
-        style={{ minHeight: "400px" }}
       >
         <div 
-          className="absolute inset-0 bg-cover bg-center z-0" 
+          className="absolute inset-0 bg-cover bg-center z-0 transition-transform duration-200 hover:scale-105" 
           style={{ backgroundImage: `url(${currentImageUrl})` }}
         />
-        <div className="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent z-10" />
+        <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/30 to-transparent z-10" />
         
         {/* Image navigation buttons */}
         {images.length > 1 && (
@@ -63,7 +61,7 @@ const TractorCard: React.FC<TractorCardProps> = ({ tractor }) => {
               onClick={prevImage}
               variant="outline"
               size="icon"
-              className="absolute left-2 top-1/2 transform -translate-y-1/2 z-20 bg-white/30 hover:bg-white/50 rounded-full p-1 w-8 h-8"
+              className="absolute left-2 top-1/2 transform -translate-y-1/2 z-20 bg-white/30 hover:bg-white/50 backdrop-blur-sm rounded-full p-1 w-8 h-8"
             >
               <ChevronLeft className="h-5 w-5 text-white" />
             </Button>
@@ -71,7 +69,7 @@ const TractorCard: React.FC<TractorCardProps> = ({ tractor }) => {
               onClick={nextImage}
               variant="outline"
               size="icon"
-              className="absolute right-2 top-1/2 transform -translate-y-1/2 z-20 bg-white/30 hover:bg-white/50 rounded-full p-1 w-8 h-8"
+              className="absolute right-2 top-1/2 transform -translate-y-1/2 z-20 bg-white/30 hover:bg-white/50 backdrop-blur-sm rounded-full p-1 w-8 h-8"
             >
               <ChevronRight className="h-5 w-5 text-white" />
             </Button>
@@ -84,8 +82,8 @@ const TractorCard: React.FC<TractorCardProps> = ({ tractor }) => {
             {images.map((_, index) => (
               <div 
                 key={index} 
-                className={`h-1.5 rounded-full transition-all ${
-                  index === currentImageIndex ? "w-4 bg-white" : "w-1.5 bg-white/50"
+                className={`h-1 rounded-full transition-all ${
+                  index === currentImageIndex ? "w-6 bg-white" : "w-1.5 bg-white/50"
                 }`}
               />
             ))}
@@ -93,10 +91,11 @@ const TractorCard: React.FC<TractorCardProps> = ({ tractor }) => {
         )}
         
         <div className="absolute bottom-0 left-0 right-0 p-6 z-20 text-white">
-          <h2 className="text-2xl font-bold">
-            {tractor.make} {tractor.model}, {tractor.age}
+          <h2 className="text-2xl font-bold mb-1">
+            {tractor.make} {tractor.model}
           </h2>
-          <p className="mt-2 text-sm opacity-90">{tractor.bio}</p>
+          <p className="text-lg opacity-90 mb-2">{tractor.age} years young</p>
+          <p className="text-sm opacity-90 line-clamp-3">{tractor.bio}</p>
         </div>
       </div>
 
