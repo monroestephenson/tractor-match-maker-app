@@ -180,8 +180,7 @@ const TractorImageCarousel: React.FC<TractorImageCarouselProps> = ({
             </div>
             
             <div className="mb-6">
-              <h2 className="text-xl font-semibold mb-2">What I'm Looking For</h2>
-              <p className="text-gray-700">A farmer who appreciates quality machinery and knows how to handle curves... in the field, of course! Must enjoy long drives through wheat fields and not mind a little mud now and then.</p>
+              <h2 className="text-xl font-semibold mb-2">What do you think?</h2>
             </div>
             
             <Button 
