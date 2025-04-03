@@ -1,5 +1,5 @@
 
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { TractorProfile } from "../data/tractorProfiles";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
@@ -10,6 +10,13 @@ interface TractorCardProps {
 }
 
 const TractorCard: React.FC<TractorCardProps> = ({ tractor }) => {
+  // Debug on mount
+  useEffect(() => {
+    console.log("TractorCard rendering:", tractor.name);
+    console.log("Images:", tractor.images);
+    console.log("Fallback image:", tractor.image);
+  }, [tractor]);
+
   // Extract the images array from the tractor profile
   // Default to an array with just the main image if images array is absent or empty
   const images = (tractor.images && tractor.images.length > 0)
@@ -33,15 +40,19 @@ const TractorCard: React.FC<TractorCardProps> = ({ tractor }) => {
     setShowCarousel(true);
   };
 
+  // Ensure we always have a valid image URL
+  const currentImageUrl = images[currentImageIndex] || '/placeholder.svg';
+
   return (
     <>
       <div 
-        className="relative w-full h-full rounded-xl overflow-hidden shadow-lg bg-white cursor-pointer"
+        className="relative w-full h-full max-h-[70vh] rounded-xl overflow-hidden shadow-lg bg-white cursor-pointer border border-gray-200"
         onClick={handleCardClick}
+        style={{ minHeight: "400px" }}
       >
         <div 
-          className="absolute inset-0 bg-cover bg-center z-0 transition-opacity duration-300" 
-          style={{ backgroundImage: `url(${images[currentImageIndex]})` }}
+          className="absolute inset-0 bg-cover bg-center z-0" 
+          style={{ backgroundImage: `url(${currentImageUrl})` }}
         />
         <div className="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent z-10" />
         

@@ -1,4 +1,5 @@
-import React, { useState, useRef } from "react";
+
+import React, { useState, useRef, useEffect } from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Swiper as SwiperType } from "swiper";
 import { tractorProfiles, TractorProfile } from "../data/tractorProfiles";
@@ -9,6 +10,22 @@ import { toast } from "sonner";
 
 // Import Swiper styles
 import "swiper/css";
+
+// Add a test profile to verify rendering
+const testProfile: TractorProfile = {
+  id: 999,
+  name: "Test Tractor 9000",
+  age: 25,
+  bio: "Testing rendering logic only.",
+  image: "/lovable-uploads/162183d8-145d-44cf-97e8-68d40f7d43b5.png",
+  images: [
+    "/lovable-uploads/162183d8-145d-44cf-97e8-68d40f7d43b5.png",
+    "/lovable-uploads/26755a37-8b7f-4499-86b8-7692c579c81c.png"
+  ],
+  make: "Test",
+  model: "9000",
+  responseMessages: ["This is a test tractor for rendering verification."]
+};
 
 // Update tractor profiles to include multiple images
 const enhancedProfiles = tractorProfiles.map(tractor => {
@@ -37,8 +54,18 @@ const TractorSwiper: React.FC = () => {
   const [matchedTractor, setMatchedTractor] = useState<TractorProfile | null>(null);
   const swiperRef = useRef<SwiperType | null>(null);
 
+  // Add our test profile at the beginning to ensure something renders
+  const allProfiles = [testProfile, ...enhancedProfiles];
+  
   // Shuffle the tractor profiles to get a random order
-  const shuffledProfiles = useRef([...enhancedProfiles].sort(() => Math.random() - 0.5));
+  const shuffledProfiles = useRef([...allProfiles].sort(() => Math.random() - 0.5));
+
+  // Debug on mount
+  useEffect(() => {
+    console.log("TractorSwiper mounted");
+    console.log("Number of profiles:", shuffledProfiles.current.length);
+    console.log("First profile:", shuffledProfiles.current[0]);
+  }, []);
 
   const handleSwipeLeft = () => {
     // Play reject animation if needed
@@ -63,19 +90,20 @@ const TractorSwiper: React.FC = () => {
   };
 
   return (
-    <div className="h-full w-full relative">
-      <div className="h-[calc(100%-100px)] w-full">
+    <div className="h-full w-full relative flex flex-col">
+      <div className="flex-1 w-full overflow-hidden">
         <Swiper
           onSwiper={(swiper) => {
             swiperRef.current = swiper;
+            console.log("Swiper initialized");
           }}
           onSlideChange={handleSwiperSlideChange}
           slidesPerView={1}
           className="w-full h-full"
           allowTouchMove={true}
         >
-          {shuffledProfiles.current.map((tractor) => (
-            <SwiperSlide key={tractor.id} className="flex items-center justify-center">
+          {shuffledProfiles.current.map((tractor, idx) => (
+            <SwiperSlide key={tractor.id || idx} className="h-full flex items-center justify-center">
               <TractorCard tractor={tractor} />
             </SwiperSlide>
           ))}

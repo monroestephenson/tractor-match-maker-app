@@ -21,6 +21,13 @@ const TractorImageCarousel: React.FC<TractorImageCarouselProps> = ({
   onClose,
   initialSlide = 0
 }) => {
+  // Debug logging
+  useEffect(() => {
+    console.log("TractorImageCarousel rendering:", tractor.name);
+    console.log("Images:", tractor.images);
+    console.log("Fallback image:", tractor.image);
+  }, [tractor]);
+
   // Apply the same image logic as in TractorCard
   const images = (tractor.images && tractor.images.length > 0)
     ? tractor.images
@@ -78,8 +85,20 @@ const TractorImageCarousel: React.FC<TractorImageCarouselProps> = ({
             <SwiperSlide key={index}>
               <div 
                 className="h-full w-full bg-center bg-cover flex items-center justify-center"
-                style={{ backgroundImage: `url(${image})` }}
-              />
+                style={{ backgroundImage: `url(${image || '/placeholder.svg'})` }}
+              >
+                {/* Fallback if image fails to load */}
+                <img 
+                  src={image || '/placeholder.svg'} 
+                  alt={`${tractor.make} ${tractor.model}`} 
+                  className="hidden" 
+                  onError={(e) => {
+                    // If image fails, change background to placeholder
+                    const target = e.currentTarget;
+                    target.parentElement!.style.backgroundImage = "url('/placeholder.svg')";
+                  }}
+                />
+              </div>
             </SwiperSlide>
           ))}
         </Swiper>
@@ -166,7 +185,7 @@ const TractorImageCarousel: React.FC<TractorImageCarouselProps> = ({
           
           <Button 
             onClick={onClose}
-            className="w-full bg-tractr-green hover:bg-tractr-green/90 text-white"
+            className="w-full bg-green-500 hover:bg-green-600 text-white"
           >
             Back to Browsing
           </Button>
