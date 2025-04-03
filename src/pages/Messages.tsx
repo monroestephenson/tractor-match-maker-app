@@ -4,6 +4,7 @@ import { ArrowLeft, Send } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { TractorProfile } from '../data/tractorProfiles';
+import { getImagePath } from '@/lib/utils';
 
 interface Message {
   id: string;
@@ -156,7 +157,7 @@ const Messages: React.FC = () => {
               >
                 <div className="w-12 h-12 rounded-full overflow-hidden border border-gray-200">
                   <img
-                    src={match.tractor.image}
+                    src={getImagePath(match.tractor.image)}
                     alt={match.tractor.name}
                     className="w-full h-full object-cover"
                   />
@@ -188,7 +189,7 @@ const Messages: React.FC = () => {
             <div className="p-4 bg-white border-b border-gray-200 flex items-center gap-3 shadow-sm">
               <div className="w-10 h-10 rounded-full overflow-hidden border border-gray-200">
                 <img
-                  src={selectedMatch.tractor.image}
+                  src={getImagePath(selectedMatch.tractor.image)}
                   alt={selectedMatch.tractor.name}
                   className="w-full h-full object-cover"
                 />
@@ -210,7 +211,7 @@ const Messages: React.FC = () => {
                   <div>
                     <div className="w-20 h-20 rounded-full overflow-hidden mx-auto mb-4 border-2 border-gray-200">
                       <img 
-                        src={selectedMatch.tractor.image} 
+                        src={getImagePath(selectedMatch.tractor.image)}
                         alt={selectedMatch.tractor.name}
                         className="w-full h-full object-cover" 
                       />
@@ -233,7 +234,7 @@ const Messages: React.FC = () => {
                       {!message.fromUser && (
                         <div className="w-8 h-8 rounded-full overflow-hidden mr-2 flex-shrink-0">
                           <img
-                            src={selectedMatch.tractor.image}
+                            src={getImagePath(selectedMatch.tractor.image)}
                             alt={selectedMatch.tractor.name}
                             className="w-full h-full object-cover"
                           />

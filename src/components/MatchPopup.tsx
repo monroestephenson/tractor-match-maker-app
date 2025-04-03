@@ -1,9 +1,9 @@
-
 import React from "react";
 import { TractorProfile } from "../data/tractorProfiles";
 import { Button } from "@/components/ui/button";
 import { MessageSquare } from "lucide-react";
 import { useNavigate } from "react-router-dom";
+import { getImagePath } from "@/lib/utils";
 
 interface MatchPopupProps {
   tractor: TractorProfile;
@@ -30,7 +30,7 @@ const MatchPopup: React.FC<MatchPopupProps> = ({ tractor, onClose }) => {
         <div className="flex justify-center mb-6">
           <div className="w-32 h-32 rounded-full overflow-hidden border-4 border-tractr-green">
             <img
-              src={tractor.image}
+              src={getImagePath(tractor.image)}
               alt={tractor.name}
               className="w-full h-full object-cover"
             />

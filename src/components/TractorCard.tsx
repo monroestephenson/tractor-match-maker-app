@@ -3,6 +3,7 @@ import { TractorProfile } from "../data/tractorProfiles";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import TractorImageCarousel from "./TractorImageCarousel";
+import { getImagePath } from "@/lib/utils";
 
 interface TractorCardProps {
   tractor: TractorProfile;
@@ -50,7 +51,7 @@ const TractorCard: React.FC<TractorCardProps> = ({ tractor }) => {
       >
         <div 
           className="absolute inset-0 bg-cover bg-center z-0" 
-          style={{ backgroundImage: `url(${import.meta.env.BASE_URL}${currentImageUrl})` }}
+          style={{ backgroundImage: `url(${getImagePath(currentImageUrl)})` }}
         />
         <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/30 to-transparent z-10" />
         
