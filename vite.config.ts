@@ -26,21 +26,6 @@ export default defineConfig(({ mode }) => ({
     },
   },
   build: {
-    assetsDir: '.',
-    rollupOptions: {
-      output: {
-        manualChunks: undefined,
-        assetFileNames: (assetInfo) => {
-          const info = assetInfo.name ? assetInfo.name : 'asset';
-          if (info.endsWith('.ico') || info.endsWith('.webmanifest') || info.endsWith('.png')) {
-            return info;
-          }
-          const ext = path.extname(info);
-          return `assets/${path.basename(info, ext)}-[hash]${ext}`;
-        },
-        chunkFileNames: 'assets/js/[name]-[hash].js',
-        entryFileNames: 'assets/js/[name]-[hash].js',
-      },
-    },
+    outDir: "dist"
   },
 }));
